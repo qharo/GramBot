@@ -1,11 +1,12 @@
 from flask import Flask, request
 import requests
+import os
 
 app = Flask(__name__)
 
 # Set up the necessary parameters
-api_token = '6004672084:AAF6wz2yFE3D80mbAfGJ3FpvQi_vITj333A'
-webhook_url = 'qharo.pythonanywhere.com'
+api_token = os.environ.get("TOKEN")
+webhook_url = os.environ.get("myUrl")
 
 
 # Webhook endpoint
