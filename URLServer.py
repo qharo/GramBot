@@ -10,12 +10,12 @@ webhook_url = os.environ.get("myUrl")
 
 
 # Webhook endpoint
-@app.route('/your_webhook_endpoint', methods=['POST'])
+@app.route('/secret_endpoint', methods=['POST'])
 def webhook():
     # Retrieve the JSON data from Telegram
     update = request.get_json()
 
-    send_message(update)
+    send_message(f"I got your message, it was: {update['message']['text']}")
 
     return 'OK'
 
@@ -54,7 +54,7 @@ def sendMessage():
 @app.route('/set_webhook', methods=['GET'])
 def set_webhook():
     # Construct the URL for the setWebhook endpoint
-    url = f'https://api.telegram.org/bot{api_token}/setWebhook?url={webhook_url}/your_webhook_endpoint'
+    url = f'https://api.telegram.org/bot{api_token}/setWebhook?url={webhook_url}/secret_endpoint'
 
     # Make the request to set the webhook
     response = requests.get(url)
